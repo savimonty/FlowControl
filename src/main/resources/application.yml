@@ -1,0 +1,9 @@
+server.port: 8080
+management:
+  metrics:
+    enable:
+      jvm: false
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info,metrics
