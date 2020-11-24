@@ -1,5 +1,6 @@
 package com.savio.monteiro.flowcontrol;
 
+import io.prometheus.client.Gauge;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -10,12 +11,12 @@ public class Producer {
     /*@Autowired
     MeterRegistry meterRegistry;*/
 
-    AtomicInteger lastProducedMessageGauge;
+    AtomicInteger lastProducedMessageGauge = new AtomicInteger(0);
 
     ConsumerService consumerService;
     public Producer(ConsumerService consumerService) {
         this.consumerService = consumerService;
-        this.lastProducedMessageGauge = AMain.meterRegistry.gauge("last_produced_message", new AtomicInteger(0));
+        AMain.meterRegistry.gauge("last_produced_message", lastProducedMessageGauge);
     }
 
     public void start() {
